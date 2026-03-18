@@ -105,7 +105,7 @@ function Hero() {
               lineHeight: 1.4,
               minWidth: 0,
             }}>
-              and in case I don't see ya — good morning, good afternoon, good evening, and good night! 
+              and in case I don't see ya — good morning, good afternoon, good evening, and good night! ✨
             </div>
           </div>
         )}
@@ -125,7 +125,7 @@ function Hero() {
             paddingLeft: "0.75rem",
             lineHeight: 1.4,
           }}>
-            and in case I don't see ya — good morning, good afternoon,<br />good evening, and good night! 🌙
+            and in case I don't see ya — good morning, good afternoon,<br />good evening, and good night! ✨
           </div>
         )}
 
@@ -190,18 +190,12 @@ function Hero() {
                 width: "100%", height: "100%",
                 objectFit: "cover", objectPosition: "top",
                 borderRadius: "2rem",
-                border: "4px solid var(--white)",
+                border: "4px solid var(--gray)",
                 boxShadow: "0 20px 60px rgba(45, 80, 22, 0.18), 0 4px 16px rgba(0,0,0,0.1)",
                 display: "block",
               }}
             />
-            <div style={{
-              position: "absolute", bottom: -12, right: -12, zIndex: 2,
-              width: 48, height: 48,
-              background: "var(--accent-pale)", border: "3px solid var(--accent-light)",
-              borderRadius: "50%", display: "flex", alignItems: "center",
-              justifyContent: "center", fontSize: "1.3rem",
-            }}>⚡</div>
+           
           </div>
         </div>
       )}
