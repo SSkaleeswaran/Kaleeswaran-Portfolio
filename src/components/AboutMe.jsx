@@ -1,20 +1,24 @@
 import { useState, useEffect } from "react";
 
 function AboutMe() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const fn = () => setIsMobile(window.innerWidth <= 768);
-    window.addEventListener("resize", fn);
-    return () => window.removeEventListener("resize", fn);
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
   }, []);
 
   return (
     <section id="about-me" style={{
-      padding: isMobile ? "4rem 1.5rem" : "5rem 3rem",
+      padding: isMobile ? "4rem 1rem" : "5rem 3rem",
       background: "#E8E4DC",
+      overflowX: "hidden",
+      width: "100vw",
+      boxSizing: "border-box",
     }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", minWidth: 0, width: "100%", boxSizing: "border-box" }}>
 
         {/* Section label + title */}
         <div style={{
@@ -35,37 +39,39 @@ function AboutMe() {
           gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
           gap: isMobile ? "2.5rem" : "4rem",
           alignItems: "start",
+          minWidth: 0,
         }}>
 
           {/* ── LEFT — Summary + Education ── */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "2rem", minWidth: 0 }}>
 
             {/* Summary */}
-            <div>
+            <div style={{ minWidth: 0 }}>
               <div style={{
                 fontFamily: "'DM Mono', monospace", fontSize: "0.90rem",
                 letterSpacing: "0.12em", textTransform: "uppercase",
                 color: "var(--accent-light)", marginBottom: "0.75rem",
               }}>Executive Summary</div>
               <p style={{
-                fontSize: "1.05rem", color: "var(--muted)", lineHeight: 1.85,
+                fontSize: isMobile ? "0.92rem" : "1.05rem", color: "var(--muted)", lineHeight: 1.8,
                 fontWeight: 300, borderLeft: "3px solid var(--accent)",
-                paddingLeft: "1.25rem", margin: 0,
+                paddingLeft: "1rem", margin: 0,
+                wordBreak: "break-word", overflowWrap: "break-word",
+                boxSizing: "border-box",
               }}>
-              I am a Computer Application graduate with a strong interest in web development and modern internet technologies. 
-              I have hands-on experience working with the MERN stack (MongoDB, Express.js, React.js, Node.js) 
-              and enjoy building responsive and scalable web applications.
-
-                I gained practical experience in frontend development, backend integration, REST APIs, and database management. 
+                I am a Computer Application graduate with a strong interest in web development and modern internet technologies.
+                I have hands-on experience working with the MERN stack (MongoDB, Express.js, React.js, Node.js)
+                and enjoy building responsive and scalable web applications.
+                <br /><br />
+                I gained practical experience in frontend development, backend integration, REST APIs, and database management.
                 I am passionate about creating efficient, user-friendly web solutions and continuously improving my technical skills.
-
+                <br /><br />
                 I am eager to grow as a developer, learn new technologies, and contribute to building impactful software and web applications.
-
               </p>
             </div>
 
             {/* Education */}
-            <div>
+            <div style={{ minWidth: 0 }}>
               <div style={{
                 fontFamily: "'DM Mono', monospace", fontSize: "0.90rem",
                 letterSpacing: "0.12em", textTransform: "uppercase",
@@ -87,7 +93,7 @@ function AboutMe() {
           </div>
 
           {/* ── RIGHT — Internship ── */}
-          <div>
+          <div style={{ minWidth: 0 }}>
             <div style={{
               fontFamily: "'DM Mono', monospace", fontSize: "0.90rem",
               letterSpacing: "0.12em", textTransform: "uppercase",
@@ -100,10 +106,11 @@ function AboutMe() {
             }}>
               {/* Header */}
               <div style={{
-                padding: "1.25rem 1.25rem",
+                padding: isMobile ? "1rem 0.85rem" : "1.25rem 1.25rem",
                 borderBottom: "1px solid var(--border)",
-                display: "flex", alignItems: "flex-start", gap: "0.85rem",
-                flexWrap: isMobile ? "wrap" : "nowrap",
+                display: "flex", alignItems: "flex-start", gap: "0.75rem",
+                flexWrap: "wrap",
+                boxSizing: "border-box",
               }}>
                 <div style={{
                   width: 44, height: 44, borderRadius: "0.75rem", flexShrink: 0,
@@ -111,10 +118,11 @@ function AboutMe() {
                   display: "flex", alignItems: "center", justifyContent: "center",
                   fontSize: "1.3rem",
                 }}>💼</div>
-                <div style={{ flex: 1 }}>
+                <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{
                     fontFamily: "'DM Sans', sans-serif", fontWeight: 500,
                     fontSize: "0.95rem", color: "var(--ink)", marginBottom: "0.15rem",
+                    wordBreak: "break-word",
                   }}>Web Developer — MERN Stack</div>
                   <div style={{
                     fontFamily: "'DM Mono', monospace", fontSize: "0.72rem",
@@ -126,7 +134,7 @@ function AboutMe() {
                   background: "var(--accent-pale)", color: "var(--accent)",
                   padding: "0.25rem 0.65rem", borderRadius: "0.3rem",
                   letterSpacing: "0.04em", flexShrink: 0, whiteSpace: "nowrap",
-                  alignSelf: isMobile ? "flex-start" : "center",
+                  alignSelf: "flex-start",
                 }}>Nov 2025 – Jan 2026</span>
               </div>
 
@@ -137,14 +145,15 @@ function AboutMe() {
                 { icon: "🔗", text: "Built and consumed REST APIs, learning how server-side data flows through endpoints and renders dynamically on the client." },
               ].map(({ icon, text }, i, arr) => (
                 <div key={i} style={{
-                  display: "flex", gap: "0.85rem", alignItems: "flex-start",
-                  padding: "1rem 1.25rem",
+                  display: "flex", gap: "0.75rem", alignItems: "flex-start",
+                  padding: isMobile ? "0.85rem 0.85rem" : "1rem 1.25rem",
                   borderBottom: i < arr.length - 1 ? "1px solid var(--border)" : "none",
                 }}>
                   <span style={{ fontSize: "1rem", marginTop: "0.1rem", flexShrink: 0 }}>{icon}</span>
                   <p style={{
                     fontFamily: "'DM Sans', sans-serif", fontSize: "0.85rem",
                     color: "var(--muted)", lineHeight: 1.7, margin: 0,
+                    wordBreak: "break-word", overflowWrap: "break-word",
                   }}>{text}</p>
                 </div>
               ))}

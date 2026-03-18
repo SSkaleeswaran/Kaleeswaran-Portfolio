@@ -1,7 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function ProjectCard({ project, delay, visible }) {
   const [hovered, setHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   return (
     <div
@@ -9,7 +17,7 @@ function ProjectCard({ project, delay, visible }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         background: "var(--white)", border: "1px solid var(--border)",
-        borderRadius: "1.25rem", padding: "2rem",
+        borderRadius: "1.25rem", padding: isMobile ? "1.25rem" : "2rem",
         display: "flex", flexDirection: "column", gap: "1rem",
         position: "relative", overflow: "hidden",
         transform: hovered ? "translateY(-7px)" : visible ? "translateY(0)" : "translateY(28px)",
@@ -31,7 +39,7 @@ function ProjectCard({ project, delay, visible }) {
       <div style={{
         fontFamily: "'DM Mono', monospace", fontSize: "0.68rem",
         color: "var(--muted)", letterSpacing: "0.1em",
-      }}>{project.num} </div>
+      }}>{project.num} / 03</div>
 
       {/* Name */}
       <div style={{
@@ -58,7 +66,7 @@ function ProjectCard({ project, delay, visible }) {
       {/* Link */}
       <a href={project.link} style={{
         display: "inline-flex", alignItems: "center", gap: "0.4rem",
-        fontFamily: "'DM Mono', monospace", fontSize: "0.85rem",
+        fontFamily: "'DM Mono', monospace", fontSize: "0.75rem",
         color: hovered ? "var(--accent)" : "var(--ink)",
         textDecoration: "none",
         borderTop: "1px solid var(--border)", paddingTop: "1rem",

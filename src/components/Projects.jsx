@@ -6,7 +6,12 @@ function Projects() {
   const [ref, visible] = useInView();
 
   return (
-    <section id="projects" style={{ padding: "5rem 3rem", maxWidth: 1200, margin: "0 auto" }}>
+    <section id="projects" style={{ padding: "5rem 3rem", maxWidth: 1200, margin: "0 auto", boxSizing: "border-box", width: "100%" }}>
+      <style>{`
+        @media (max-width: 768px) {
+          #projects { padding: 4rem 1rem !important; }
+        }
+      `}</style>
       <div style={{
         fontFamily: "'DM Mono', monospace", fontSize: "0.72rem",
         letterSpacing: "0.14em", textTransform: "uppercase",
@@ -21,7 +26,7 @@ function Projects() {
 
       <div ref={ref} style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+        gridTemplateColumns: "repeat(auto-fill, minmax(min(320px, 100%), 1fr))",
         gap: "1.5rem",
       }}>
         {PROJECTS.map((project, i) => (
